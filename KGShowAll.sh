@@ -1,6 +1,6 @@
 #!/bin/sh
 #true or no
-echo -n "AppleShowAllFiles ? (y/n)"
+echo "AppleShowAllFiles ? (y/n)"
 read is_allow
 
 #defaults write com.apple.finder QuitMenuItem -bool YES  设置Finder默认是打开的
