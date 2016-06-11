@@ -19,21 +19,21 @@ read isUninstall
 if [[ $isUninstall == "n" ]]; then
 		exit 0
 fi
+
 echo "uninstall begin............."
+
+: > /Users/kevin/Documents/Jumper/package.txt
+
 for packageline in $(adb shell pm list packages); do
 	if [[ $packageline =~ $packname ]]; then
-		echo ${packageline#*package:}
-		adb uninstall ${packageline#*package:}
-		echo "adb uninstall ${packageline#*package:}"
+		echo "${packageline#*package:}" >> /Users/kevin/Documents/Jumper/package.txt
 	fi
 done
+
+cat /Users/kevin/Documents/Jumper/package.txt | while read line
+do
+	echo $line
+	adb uninstall $line
+done
+
 echo "uninstall over............."
-
-# echo "begin to uninstall .....";   
-
-# for line in `cat $1`
-# do
-# 	echo $line
-# 	adb uninstall $line -l  
-# done
-# echo "uninstall over.............";  
